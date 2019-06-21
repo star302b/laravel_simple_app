@@ -12,3 +12,9 @@
 */
 
 Route::get('/','HomePageController@index')->name('home-page');
+Route::get('/order-status','OrderStatusController@index')->name('order-status.get');
+Route::post('/order-status','OrderStatusController@store')->name('order-status.save');
+
+
+//Services
+Route::get('/doc-retrieval','ServiceController@docRetrievalService')->name('service.docretrieval');

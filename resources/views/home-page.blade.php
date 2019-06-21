@@ -1,20 +1,10 @@
 @include('template-parts.header')
 <main id="main" class="home-page">
     <section class="intro-section">
-        <div class="intro-header" style="background-image: url(images/image01.jpg);">
-            <div class="container">
-                <a href="#" class="logo">
-                    <img src="images/logo.svg" width="238" alt="Legalbox publishing">
-                </a>
-                <div class="info-block">
-                    <p>
-                        New York State’s primary source for <span class="green-color">LLC, LLP, LP, PLLC, Publishing Service</span> serving all 62 NY State Counties
-                    </p>
-                </div>
-            </div>
-        </div>
+        @include('template-parts.intro-header')
+
         <div class="intro-body">
-            <div class="bg-image" style="background-image: url(images/image02.jpg);"></div>
+            <div class="bg-image" style="background-image: url(/images/image02.jpg);"></div>
             <div class="container">
                 <div class="tooltip-box">
                     <p>We’ll <strong>MEET</strong> or <strong>BEAT any</strong> price</p>
@@ -52,7 +42,7 @@
     <section class="started-section">
         <div class="container">
             <div class="started-block">
-                <div class="started-holder" style="background-image: url(images/image03.jpg);">
+                <div class="started-holder" style="background-image: url(/images/image03.jpg);">
                     <ul class="additional-list">
                         <li>
                             <i class="icon-clock"></i>
@@ -80,9 +70,11 @@
                                         <label>Entity Ending</label>
                                         <select>
                                             <option value="" selected disabled>Select</option>
-                                            <option value="">Select2</option>
-                                            <option value="">Select3</option>
-                                            <option value="">Select4</option>
+                                                <option value="0">L.L.C.</option>
+                                                <option value="1">LLC</option>
+                                                <option value="2">LP</option>
+                                                <option value="3">LLP</option>
+                                                <option value="4">PLLC</option>
                                         </select>
                                     </div>
                                 </div>
@@ -148,7 +140,7 @@
                         </a>
                     </div>
                     <div class="column-3">
-                        <a href="#" class="control-box">
+                        <a href="{{URL::to('/order-status')}}" class="control-box">
                             <i class="icon-status"></i>
                             <div class="title-box">
                                 <h2>Check</h2>

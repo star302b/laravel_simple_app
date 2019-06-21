@@ -8,7 +8,7 @@
                 <nav class="nav-top">
                     <ul>
                         <li><a href="">Publish Now</a></li>
-                        <li><a href="">Order Status</a></li>
+                        <li><a href="{{URL::to('/order-status')}}">Order Status</a></li>
                         <li><a href="">Publishing Lookup</a></li>
                         <li><a href="">Publishing Documetn Retreival</a></li>
                         <li><a href="">120 Day Calculator</a></li>
@@ -31,7 +31,7 @@
                 <ul>
                     <li><a href="{{URL::to('/')}}">Home</a></li>
                     <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Order Status</a></li>
+                    <li><a href="{{URL::to('/order-status')}}">Order Status</a></li>
                 </ul>
             </nav>
         </div>
@@ -48,6 +48,103 @@
 <!-- build:js -->
 <script src="{{ asset('js/main.min.js') }}"></script>
 <!-- endbuild -->
+<script>
+    jQuery(document).ready(function($){
+        function validateEmail(email) {
+            var re = /\S+@\S+\.\S+/;
+            return re.test(email);
+        }
+        $('.service-steps-form').on('submit',function (event) {
+            event.stopPropagation();
+            if($('.tab .tab-head').find('li a.active').attr('href') != 'tab-3'){
+                if($('.tab .tab-head').find('li a.active').attr('href') == 'tab-1'){
+                    // $('.tab .tab-head').find('li a.active').removeClass('active');
+                    $('.tab .tab-head').find('li a[href="tab-2"]').click();
+                }else if($('.tab .tab-head').find('li a.active').attr('href') == 'tab-2'){
+                    // $('.tab .tab-head').find('li a.active').removeClass('active');
+                    $('.tab .tab-head').find('li a[href="tab-3"]').click();
+                }
+                event.preventDefault();
+            }else{
+                console.log('send form');
+                return false;
+            }
+        });
+        $('.document-section input[name="approximage_month"],.document-section input[name="approximage_day"],.document-section input[name="approximage_year"]').on('change',function(){
+            if($('.document-section input[name="approximage_month"]').val() && $('.document-section input[name="approximage_day"]').val() && $('.document-section input[name="approximage_year"]').val())
+            {
+                $('.document-section input[name="approximage_date"]').val($('.document-section input[name="approximage_year"]').val() + '/' + $('.document-section input[name="approximage_month"]').val()+ '/' +$('.document-section input[name="approximage_day"]').val());
+                var d = new Date($('.document-section input[name="approximage_date"]').val());
+                var current_time = new Date();
+
+                current_time.setMonth(current_time.getMonth() - 3);
+
+                if(d < current_time){
+                    $('.less-thithy-month').hide();
+                    $('.more-thithy-month').show();
+                }else{
+                    $('.less-thithy-month').show();
+                    $('.more-thithy-month').hide();
+                }
+            }
+        });
+
+        $('.order-status-main').on('submit', function (event) {
+            event.stopPropagation();
+            var datastring = $(".order-status-main").serialize();
+            if ($(this).find('[name="entity-name"]').val() &&
+                $(this).find('[name="name"]').val() &&
+                validateEmail($(this).find('[name="order-email"]').val())) {
+                $.ajax({
+                    type: "POST",
+                    url: "/order-status",
+                    data: {
+                        "form_data": datastring,
+                        "_token": "{{ csrf_token() }}",
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('.call-form-request label.error').remove();
+                        if (data['error'].indexOf('captcha') >= 0) {
+                            $('.captcha-holder .g-recaptcha').after('<label class="error">This field is required.</label>');
+                        }
+                        if (data['error'].length == 0) {
+                            $('.order-status-form').find('.user-name-main').text($('input[name="first-name"]').val());
+                            $('.order-status-form').addClass('thankyou');
+                            $("html, body").animate({scrollTop: 0}, "slow");
+                            // setTimeout(function () {
+                            //     $('.order-status-form input,.order-status-form select,.order-status-form textarea').val('');
+                            //     document.querySelector('.order-status-form').classList.remove('thankyou');
+                            //     location.reload();
+                            // },10000)
+                        }
+                        //var obj = jQuery.parseJSON(data); if the dataType is not specified as json uncomment this
+                        // do what ever you want with the server response
+                    },
+                    error: function () {
+                        // alert('error handling here');
+                    }
+                });
+            }
+            event.preventDefault()
+        });
+
+    });
+    @php $routeName = \Illuminate\Support\Facades\Route::currentRouteName() @endphp
+
+    @if( $routeName == 'order-status.get')
+
+    function recaptchaCallback() {
+        var btnSubmit = document.getElementById("btnSubmit");
+
+        if ( btnSubmit.classList.contains("hidden") ) {
+            btnSubmit.classList.remove("hidden");
+            btnSubmit.classList.add("show");
+        }
+    }
+
+    @endif
+</script>
 </body>
 
 </html>

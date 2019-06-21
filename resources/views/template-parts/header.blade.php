@@ -8,6 +8,8 @@
 
     <!-- build:css -->
     <link rel="stylesheet" href="{{ asset('css/main.min.css') }}">
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
     <!-- endbuild -->
 </head>
 
@@ -15,6 +17,12 @@
 <div id="wrapper">
     <header id="header">
         <div class="container-sm">
+            @php
+            $active_class = array();
+            if(isset($active_menu_item) && !empty($active_menu_item)){
+
+            }
+            @endphp
             <ul class="header-menu">
                 <li>
                     <a href="#">
@@ -25,7 +33,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{URL::to('/order-status')}}">
                         <div class="img-box">
                             <i class="icon-status"></i>
                         </div>
