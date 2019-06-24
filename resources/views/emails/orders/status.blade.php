@@ -2,7 +2,7 @@
     <strong>Name: </strong><span>{{$form_data['name']}}</span>
 </div>
 <div>
-    <strong>Entity Name: </strong><span>{{$form_data['entity-name']}}</span>
+    <strong>Entity Name: </strong><span>{{$form_data['entity_name']}}</span>
 </div>
 @if(isset($form_data['order-email']) && !empty($form_data['order-email']))
     <div>

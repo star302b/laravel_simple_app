@@ -133,4 +133,6 @@ return [
 
     'log_channel' => env('MAIL_LOG_CHANNEL'),
 
+    'mail_site_admin' => env('MAIL_SITE_ADMIN','jubasik23@gmail.com'),
+
 ];

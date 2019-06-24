@@ -27,7 +27,7 @@
                                        <li>If we are unable to <strong>‘Meet or Beat’</strong>  that rate, we will refund you 100% of what you paid us, thus terminating the process.</li>
                                    </ul>
                                    <div class="btn-box">
-                                       <a href="#" class="btn btn-large">Price match request</a>
+                                       <a href="{{ route('price-match.index') }}" class="btn btn-large">Price match request</a>
                                    </div>
                                </div>
                            </span>
@@ -57,35 +57,34 @@
                     </ul>
                     <div class="form-column">
                         <h1>Let’s Get Started:</h1>
-                        <form action="" class="started-form">
+                        <form action="{{ route('service.routeHomePage') }}" method="post" class="started-form">
+                            @csrf
                             <div class="row">
                                 <div class="column-7">
                                     <div class="form-group">
                                         <label>Entity Name</label>
-                                        <input type="text">
+                                        <input type="text" name="entity_name" required>
                                     </div>
                                 </div>
                                 <div class="column-3">
                                     <div class="form-group">
                                         <label>Entity Ending</label>
-                                        <select>
+                                        <select name="entity_ending" required>
                                             <option value="" selected disabled>Select</option>
-                                                <option value="0">L.L.C.</option>
-                                                <option value="1">LLC</option>
-                                                <option value="2">LP</option>
-                                                <option value="3">LLP</option>
-                                                <option value="4">PLLC</option>
+                                            @foreach($entityEndings as $entityEnding)
+                                                <option value="{{ $entityEnding }}">{{ $entityEnding }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="column-select form-group">
-                                    <select>
+                                    <select name="county">
                                         <option value="" selected disabled>Select Your County</option>
-                                        <option value="">County2</option>
-                                        <option value="">County3</option>
-                                        <option value="">County4</option>
+                                        @foreach($countyList as $countyItemKey => $countyItem)
+                                            <option value="{{ $countyItemKey }}" >{{ $countyItem }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="column-tooltip form-group">
@@ -122,7 +121,7 @@
                 </div>
                 <div class="control-block">
                     <div class="column-3">
-                        <a href="#" class="control-box">
+                        <a href="{{ route('free-lookup.index') }}" class="control-box">
                             <i class="icon-search"></i>
                             <div class="title-box">
                                 <h2>Free Lookup</h2>
@@ -131,7 +130,7 @@
                         </a>
                     </div>
                     <div class="column-3">
-                        <a href="#" class="control-box">
+                        <a href=" {{ route('service.docretrieval') }}" class="control-box">
                             <i class="icon-download"></i>
                             <div class="title-box">
                                 <h2>Publishing</h2>
@@ -140,7 +139,7 @@
                         </a>
                     </div>
                     <div class="column-3">
-                        <a href="{{URL::to('/order-status')}}" class="control-box">
+                        <a href="{{ route('order-status.get') }}" class="control-box">
                             <i class="icon-status"></i>
                             <div class="title-box">
                                 <h2>Check</h2>

@@ -1,32 +1,34 @@
 <div>
-    <h3>Dear USACORP, there is a new Lowest Price Match request</h3>
+    <h3>Dear LEGALBOX, there is a new Lowest Price Match request</h3>
 </div>
-@if(isset($form_data['service']) && !empty($form_data['service']))
+@if(isset($form_data['entity_name_ending']) && !empty($form_data['entity_name_ending']))
     <div>
-        <strong>Service: </strong><span>{{\App\Service::where('id',$form_data['service'])->first()->name}}</span>
+        <strong>Entity Name & Ending: </strong><span>{{$form_data['entity_name_ending']}}</span>
     </div>
 @endif
-@if(isset($form_data['state']) && !empty($form_data['state']))
-    <div>
-        <strong>State: </strong><span>{{\App\State::where('id',$form_data['state'])->first()->name}}</span>
-    </div>
-@endif
-
 @if(isset($form_data['county']) && !empty($form_data['county']))
     <div>
         <strong>County: </strong><span>{{$form_data['county']}}</span>
     </div>
 @endif
-
-@if(isset($form_data['rate']) && !empty($form_data['rate']))
+@if(isset($form_data['price']) && !empty($form_data['price']))
     <div>
-        <strong>Rate offered by that company: </strong><span>{{$form_data['rate']}}</span>
+        <strong>Price quote you received: </strong><span>{{$form_data['price']}}</span>
     </div>
 @endif
-
-@if(isset($form_data['company']) && !empty($form_data['company']))
+@if(isset($form_data['quote']) && !empty($form_data['quote']))
     <div>
-        <strong>That company’s name: </strong><span>{{$form_data['company']}}</span>
+        <strong>Was this quote for the above entity name and county? </strong><span>{{$form_data['quote']}}</span>
+    </div>
+@endif
+@if(isset($form_data['asurred']) && !empty($form_data['asurred']))
+    <div>
+        <strong>Were you assured the 3 items below:</strong><span>{{$form_data['asurred']}}</span>
+    </div>
+@endif
+@if(isset($form_data['name_of_company']) && !empty($form_data['name_of_company']))
+    <div>
+        <strong>That company’s name: </strong><span>{{$form_data['name_of_company']}}</span>
     </div>
 @endif
 @if(isset($form_data['comment']) && !empty($form_data['comment']))
@@ -34,9 +36,9 @@
         <strong>Notes / Comments: </strong><p>@php echo html_entity_decode(htmlentities(preg_replace("/\r\n|\r|\n/",'<br/>',$form_data['comment']))) @endphp</p>
     </div>
 @endif
-@if(isset($form_data['name']) && !empty($form_data['name']))
+@if(isset($form_data['contact_name']) && !empty($form_data['contact_name']))
     <div>
-        <strong>Name: </strong><span>{{$form_data['name']}}</span>
+        <strong>Name: </strong><span>{{$form_data['contact_name']}}</span>
     </div>
 @endif
 @if(isset($form_data['phone']) && !empty($form_data['phone']))
@@ -47,11 +49,6 @@
 @if(isset($form_data['email']) && !empty($form_data['email']))
     <div>
         <strong>Email: </strong><span>{{$form_data['email']}}</span>
-    </div>
-@endif
-@if(isset($form_data['company_applicable']) && !empty($form_data['company_applicable']))
-    <div>
-        <strong>Company name (if applicable): </strong><span>{{$form_data['company_applicable']}}</span>
     </div>
 @endif
 @if(isset($ip_address) && !empty($ip_address))

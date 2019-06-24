@@ -29,11 +29,11 @@
                     </div>
                     <div class="form-body">
                         <div class="form-column">
-                            <form method="post" enctype="multipart/form-data" class="provide-form order-status-main">
+                            <form method="post" action="{{ route('order-status.save') }}" enctype="multipart/form-data" class="provide-form">
                                 @csrf
                                 <div class="form-group">
                                     <label>Entity Name</label>
-                                    <input type="text" name="entity-name" required>
+                                    <input type="text" name="entity_name" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Your Email</label>

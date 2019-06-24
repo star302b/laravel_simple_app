@@ -1,5 +1,4 @@
 @extends('layouts.service')
-{{--@section('title', 'Step 2')--}}
 @section('content')
     <section class="started-section document-section">
         <div class="container">
@@ -96,13 +95,13 @@
                                         <label class="light">Approximage Date of filing:</label>
                                         <div class="row date-row">
                                             <div class="column-3">
-                                                <input type="number" maxlength="2" placeholder="MM" name="approximage_month" required>
+                                                <input type="number" maxlength="2" placeholder="MM" name="approximage_month" >
                                             </div>
                                             <div class="column-3">
-                                                <input type="number" maxlength="2" placeholder="DD" name="approximage_day" required>
+                                                <input type="number" maxlength="2" placeholder="DD" name="approximage_day" >
                                             </div>
                                             <div class="column-3">
-                                                <input type="number" minlength="4" maxlength="4" pattern="\d{4}" placeholder="Year" name="approximage_year" required>
+                                                <input type="number" minlength="4" maxlength="4" pattern="\d{4}" placeholder="Year" name="approximage_year" >
                                             </div>
                                         </div>
                                         <input type="hidden" name="approximage_date">

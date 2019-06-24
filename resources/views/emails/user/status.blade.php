@@ -43,8 +43,8 @@
                                     @if(isset($form_data['service-type']) && !empty($form_data['service-type']))
                                         <p style=""><b>Type Of Service: </b>{{$form_data['service-type']}}</p>
                                     @endif
-                                    @if(isset($form_data['entity-name']) && !empty($form_data['entity-name']))
-                                        <p style=""><b>Entity Name: </b>{{$form_data['entity-name']}}</p>
+                                    @if(isset($form_data['entity_name']) && !empty($form_data['entity_name']))
+                                        <p style=""><b>Entity Name: </b>{{$form_data['entity_name']}}</p>
                                     @endif
                                     @if(isset($form_data['first-name']) && !empty($form_data['first-name']))
                                         <p style=""><b>First Name: </b>{{$form_data['first-name']}}</p>

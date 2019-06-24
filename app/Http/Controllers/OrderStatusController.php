@@ -11,12 +11,18 @@ use Illuminate\Support\Facades\Mail;
 class OrderStatusController extends Controller
 {
     public function index(Request $request){
-        return view('order-status');
+        $data = array();
+        $data['active_menu_item'] = 'order-status';
+        return view('pages.order_status.index',$data);
     }
 
     public function store(Request $request)
     {
-        parse_str($request->get('form_data'), $all_data);
+        $all_data = $request->all();
+        $data=array();
+        $data = $all_data;
+        $data['active_menu_item'] = 'order-status';
+
         $capthca_check = false;
         if (!empty($all_data['g-recaptcha-response'])) {
             $client = new Client();
@@ -40,7 +46,7 @@ class OrderStatusController extends Controller
                 Mail::to($all_data['order-email'])->send(new OrderStatusUserMail($all_data));
             }
 
-            return json_encode(['error' => '']);
+            return view('pages.order_status.thankyou',$data);
         }
     }
 }

@@ -9,8 +9,8 @@
                     <ul>
                         <li><a href="">Publish Now</a></li>
                         <li><a href="{{URL::to('/order-status')}}">Order Status</a></li>
-                        <li><a href="">Publishing Lookup</a></li>
-                        <li><a href="">Publishing Documetn Retreival</a></li>
+                        <li><a href="{{ route('free-lookup.index') }}">Publishing Lookup</a></li>
+                        <li><a href="{{URL::to('/doc-retrieval')}}">Publishing Document Retrieval</a></li>
                         <li><a href="">120 Day Calculator</a></li>
                     </ul>
                 </nav>
@@ -54,14 +54,69 @@
             var re = /\S+@\S+\.\S+/;
             return re.test(email);
         }
+
+        function add_price(selector){
+            var name = '';
+            var price = null;
+
+            if($(selector).data('price_label')){
+                name = $(selector).data('price_label');
+            }
+            console.log($(selector).data('price'))
+            if($(selector).data('price') || $(selector).data('price') === 0){
+                price = $(selector).data('price');
+            }
+
+            $('.card-box .card-price-list').append('<li data-name="'+name+'" data-price="'+price+'"><span class="name">'+name+'</span><span class="price">$'+price+'</span></li>');
+
+
+            update_total_price();
+        }
+
+        function remove_price(selector){
+            var name = '';
+            if($(selector).data('price_label')){
+                name = $(selector).data('price_label');
+                $('.card-box .card-price-list li[data-name="'+name+'"]').remove();
+            }
+            update_total_price();
+        }
+
+        function update_total_price(){
+            var total_price = 0;
+
+            var all_item_in_list = $('.card-box .card-price-list').eq(0).find('li');
+
+            for(var i = 0 ; i < all_item_in_list.length; i++){
+                var price_item = $($('.card-box .card-price-list').eq(0).find('li')[i]).attr('data-price');
+                total_price += price_item * 1;
+            }
+
+            $('.total-box-price').text(total_price);
+            $('input[name="total_price"]').val(total_price)
+        }
+
+        $('input[name="entity-name-hide"]').on('change',function () {
+            if($(this).val() == 'no') {
+                $('.entity-name-show-hide').show();
+            }else{
+                $('.entity-name-show-hide').hide();
+            }
+        })
+
+        $('input[name="documents[]"]').on('change',function () {
+            if($(this).prop('checked')){
+                add_price(this);
+            }else{
+                remove_price(this);
+            }
+        })
         $('.service-steps-form').on('submit',function (event) {
             event.stopPropagation();
             if($('.tab .tab-head').find('li a.active').attr('href') != 'tab-3'){
                 if($('.tab .tab-head').find('li a.active').attr('href') == 'tab-1'){
-                    // $('.tab .tab-head').find('li a.active').removeClass('active');
                     $('.tab .tab-head').find('li a[href="tab-2"]').click();
                 }else if($('.tab .tab-head').find('li a.active').attr('href') == 'tab-2'){
-                    // $('.tab .tab-head').find('li a.active').removeClass('active');
                     $('.tab .tab-head').find('li a[href="tab-3"]').click();
                 }
                 event.preventDefault();
