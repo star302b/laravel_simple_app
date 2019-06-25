@@ -41,41 +41,16 @@
                                         if(isset($order->data)){
                                         $product_data = json_decode($order->data);
                                         }
-                                        $additional_company_names = array();
-                                        if(isset($product_data->additional_entity_info_fields) && !empty($product_data->additional_entity_info_fields)){
-                                            foreach ($product_data->additional_entity_info_fields as $additional_entity_info_fields){
-                                                if(isset($additional_entity_info_fields->{20}) && !empty($additional_entity_info_fields->{20})){
-                                                    if(isset($additional_entity_info_fields->{20}->input) && !empty($additional_entity_info_fields->{20}->input)){
-                                                        $additional_company_names[] = $additional_entity_info_fields->{20}->input;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        if(!empty($additional_company_names)){
-                                            $additional_company_names = implode(',',$additional_company_names);
-                                        }
+
                                         @endphp
                                 <td style="font-family: Arial, Helvetica, sans-serif; font-size: 15px; line-height: 20px; color: #223036;">
                                     <p style="margin: 0 0 20px; font-size: 18px;"><b style="color:#f8b104">Dear
-                                            @php
-                                                if(!empty($product_data->step_fifth_contact_info->first_name)){
-                                            echo $product_data->step_fifth_contact_info->first_name . ' ';
-                                                }
-                                                if(!empty($product_data->step_fifth_contact_info->last_name)){
-                                            echo $product_data->step_fifth_contact_info->last_name;
-                                                }
-                                            @endphp
+                                            {{ isset($product_data->title) ? $product_data->title : '' }} {{ $product_data->first_name }} {{ $product_data->last_name }}
                                         </b></p>
                                     <p style="margin: 0 0 20px;">Thank you for your order, and for giving us the opportunity to serve you.</p>
-                                    <p style="margin: 0 0 20px;">Your {{ \App\Service::where('id',$order->service_id)->first()->name }} order for {{ $company_name }}
-                                        @if(!empty($additional_company_names))
-                                            and {{ $additional_company_names }}
-                                        @endif
+                                    <p style="margin: 0 0 20px;">Your {{ $order->service }} order for {{ $order->entity_name }} {{ $order->entity_ending }}
                                         has been received and is currently being reviewed by our team of professionals.</p>
-                                    <p style="margin: 0 0 20px;">Your order reference is <b style="color:#f8b104">{{ $company_name }}</b></p>
-                                    <p style="margin: 0 0 20px;">Should you have any questions feel free to email us at service@usacorpinc.com or call 844. USACORP (844.872.2677)</p>
-                                    <p style="margin: 0 0 40px;"><b>Thank You!</b></p>
-                                    <p style="margin: 0; font-size: 12px;">USACORP Inc <br>325 Division Avenue - Brooklyn NY 11211</p>
+                                    <p style="margin: 0 0 20px;">Your order reference is <b style="color:#f8b104"></b></p>
                                 </td>
                             </tr>
                             <tr>
@@ -96,3 +71,6 @@
     </tr>
     </tbody>
 </table>
+@php
+die();
+@endphp

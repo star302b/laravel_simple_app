@@ -28,9 +28,7 @@
                     @csrf
                     <ul class="tab-body">
                         <li class="tab-item active" id="tab-1">
-                            {{--<div class="entity-section">--}}
-                                @yield('content')
-                            {{--</div>--}}
+                            @yield('content')
                         </li>
                         <li class="tab-item" id="tab-2">
                             <div class="payment-section">
@@ -46,8 +44,11 @@
                                     <div class="card-box">
                                         <span class="title text-green">Your total is:</span>
                                         <ul class="card-price-list">
+                                            @if(isset($base_price_name))
+                                                <li data-name="{{ $base_price_name }}" data-price="{{ $price }}"><span class="name">{{ $base_price_name }}</span><span class="price">${{ $price }}</span></li>
+                                            @endif
                                         </ul>
-                                        <span class="total text-green">Total: $<span class="total-box-price">0</span></span>
+                                        <span class="total text-green">Total: $<span class="total-box-price">{{ $price }}</span></span>
                                     </div>
                                     @else
                                     <div class="card-box">
@@ -190,8 +191,11 @@
                                         <div class="card-box">
                                             <span class="title text-green">Your total is:</span>
                                             <ul class="card-price-list">
+                                                @if(isset($base_price_name))
+                                                    <li data-name="{{ $base_price_name }}" data-price="{{ $price }}"><span class="name">{{ $base_price_name }}</span><span class="price">${{ $price }}</span></li>
+                                                @endif
                                             </ul>
-                                            <span class="total text-green">Total: $<span class="total-box-price">0</span></span>
+                                            <span class="total text-green">Total: $<span class="total-box-price">{{ $price }}</span></span>
                                         </div>
                                     @else
                                         <div class="card-box">
@@ -229,7 +233,7 @@
                                         </div>
                                     </div>
                                     <h4 class="form-group-title">Billing Address</h4>
-                                    @if(!$is_not_sure)
+                                    @if(!$is_not_sure && 0)
                                     <ul class="radio-list italic under-billing">
                                         <li>
                                             <input type="checkbox" id="comp-adddress" name="comp-adddress">
@@ -265,9 +269,9 @@
                                                         <label>State</label>
                                                         <select name="billing_state">
                                                             <option value="" selected disabled>Please Select</option>
-                                                            <option value="">Select2</option>
-                                                            <option value="">Select3</option>
-                                                            <option value="">Select4</option>
+                                                            @foreach($countyList as $state)
+                                                                <option value="{{ $state['name'] }}">{{ $state['name'] }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
@@ -280,6 +284,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @if(!$is_not_sure)
                                     <div class="promocode-holder">
                                         <h3>Promo Code</h3>
                                         <div class="promocode-form">
@@ -292,25 +297,25 @@
                                                 </div>
                                                 <div class="column-3">
                                                     <div class="form-group">
-                                                        <input type="submit" value="Apply">
+                                                        <input type="submit" value="Apply" class="apply_promo_code">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         {{--TODO Show promo code name and price minus how match--}}
-                                        <span class="discount show-if-promo-used" style="display: none">  <span class="text-red"></span></span>
+                                        <span class="discount show-if-promo-used" style="display: none"><span class="promo-name"></span> <span class="text-red"></span></span>
                                         <p class="show-if-promo-used" style="display: none">Applied to order</p>
-
                                     </div>
+                                    @endif
                                     <div class="total-block">
                                         <div class="total-price">
                                             {{--TODO Show price before promo used--}}
-                                            <span class="h4 show-if-promo-used" style="display: none">Subtotal: $<span class="total-box-price">0</span></span>
+                                            <span class="h4 show-if-promo-used" style="display: none">Subtotal: $<span class="prev-total-box-price">0</span></span>
                                             {{--TODO Show how match promo minus--}}
                                             <span class="h4 text-red show-if-promo-used" style="display: none;"></span>
 
                                             {{--TODO Show price after promo used--}}
-                                            <h4>Subtotal: $<span class="total-box-price">0</span></h4>
+                                            <h4>Subtotal: $<span class="total-box-price">{{ $price }}</span></h4>
                                         </div>
                                         <div class="info-box">
                                             <h5>Summary of service process:</h5>
@@ -319,12 +324,12 @@
 
                                         <ul class="radio-list">
                                             <li>
-                                                <input type="checkbox" id="authorize" name="authorize">
-                                                <label for="authorize">I hereby authorize LegalBoxPublishing to charge my card in the amount of $<span class="total-box-price">0</span></label>
+                                                <input type="checkbox" id="authorize" name="authorize" value="authorize-confirm">
+                                                <label for="authorize">I hereby authorize LegalBoxPublishing to charge my card in the amount of $<span class="total-box-price">{{ $price }}</span></label>
                                             </li>
                                         </ul>
                                     </div>
-                                    <input type="hidden" name="total_price" value="0">
+                                    <input type="hidden" name="total_price" value="{{ $price }}">
                                     <div class="captcha-box"></div>
                                     <div class="btn-holder">
                                         <button type="submit" class="btn btn-light border">Process order</button>

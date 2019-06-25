@@ -11,5 +11,8 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index')->name('admin.home');
-
+    $router->resource('county-promo-codes', CountyPromoCodeController::class);
+    $router->resource('countyimports', CountyImportController::class);
+    $router->resource('countyprices', CountyPricesController::class);
+    $router->resource('order', OrderController::class);
 });

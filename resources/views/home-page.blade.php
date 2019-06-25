@@ -41,7 +41,7 @@
     </section>
     <section class="started-section">
         <div class="container">
-            <div class="started-block">
+            <div class="started-block" id="publishing-start-form">
                 <div class="started-holder" style="background-image: url(/images/image03.jpg);">
                     <ul class="additional-list">
                         <li>
@@ -168,15 +168,15 @@
                             <div class="align-box">
                                 <strong class="card-info-title">No worries!</strong>
                                 <div class="link-box">
-                                    <a href="#" class="link-underline js-popup-opener">More </a>
+                                    <a href="#" class="link-underline js-tool-opener">More </a>
                                     <span class="tool-holder">
-                                                <i class="icon-arrow-right js-tool-opener"></i>
-                                                <div class="tool-popup">
-                                                    <div>LegalBox Publishing will initiate publication <strong class="box-underline">immediately, <i class="underline"></i></strong> thus providing a commencement letter, which is sufficient proof of publishing compliance, while the LLC is publishing. This is an acceptable publishing proof until final docs become available. </div>
-                                                    <a href="#" class="popup-link">Lets Do It! <i class="icon-arrow-right "></i></a>
-                                                    <a href="#" class="close"></a>
-                                                </div>
-                                            </span>
+                                        <i class="icon-arrow-right js-tool-opener"></i>
+                                        <div class="tool-popup">
+                                            <div>LegalBox Publishing will initiate publication <strong class="box-underline">immediately, <i class="underline"></i></strong> thus providing a commencement letter, which is sufficient proof of publishing compliance, while the LLC is publishing. This is an acceptable publishing proof until final docs become available. </div>
+                                            <a href="{{ route('home-page') }}#publishing-start-form" class="popup-link">Lets Do It! <i class="icon-arrow-right "></i></a>
+                                            <a href="#" class="close"></a>
+                                        </div>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -192,7 +192,7 @@
                                     <p>LLCPublishingofNY will initiate publication immediately, thus providing a commencement letter, which is sufficient proof of publishing compliance while the LLC is publishing. This is your provisional publishing proof until final docs become available. </p>
                                 </div>
                                 <div class="link-container">
-                                    <a href="" class="link-underline">Publish now <i class="icon-arrow-right-3"></i></a>
+                                    <a href="{{ route('home-page') }}#publishing-start-form" class="link-underline">Publish now <i class="icon-arrow-right-3"></i></a>
                                 </div>
                             </div>
                             <a href="#" class="close"></a>
@@ -215,30 +215,51 @@
                                     Calculate Now
                                 </a>
                                 <span class="tool-holder">
-                                            <i class="icon-arrow-right js-tool-opener"></i>
-
-                                            <div class="tool-popup">
-                                                <div>LegalBox Publishing will initiate publication <strong class="box-underline">immediately, <i class="underline"></i></strong> thus providing a commencement letter, which is sufficient proof of publishing compliance, while the LLC is publishing. This is an acceptable publishing proof until final docs become available. </div>
-                                                <a href="#" class="popup-link">Lets Do It! <i class="icon-arrow-right "></i></a>
-                                                <a href="#" class="close"></a>
-                                            </div>
-                                        </span>
+                                    <i class="icon-arrow-right js-popup-opene"></i>
+                                </span>
                             </div>
                         </div>
                     </div>
                     <!-- POPUP -->
-                    <div class="popup-local">
+                    <div id="popap-main-clculator" class="popup-local @if(isset($_GET['open_calculator']))active-popup @endif">
                         <div class="box">
-                            <h3 class="title">120 Days Calculator</h3>
-                            <div class="cont">
-                                <h2 class="main-title">
-                                    <b>Oops!</b>
-                                    <strong class="">You are at / over the 120 days, but no worries!</strong>
-                                </h2>
-                                <p>LLCPublishingofNY will initiate publication immediately, thus providing a commencement letter, which is sufficient proof of publishing compliance while the LLC is publishing. This is your provisional publishing proof until final docs become available. </p>
+                            <h3 class="title"><i class="icon-calculate"></i> 120?</h3>
+                            <div class="box-cont box-cont-1 box-show-more-than-time" style="display: none;">
+                                <div class="cont">
+                                    <h2 class="main-title">
+                                        <b>Oops!</b>
+                                        <strong>You are at / over the 120 days, but no worries!</strong>
+                                    </h2>
+                                    <p>LLCPublishingofNY will initiate publication immediately, thus providing a commencement letter, which is sufficient proof of publishing compliance while the LLC is publishing. This is your provisional publishing proof until final docs become available. </p>
+                                </div>
+                                <div class="link-container">
+                                    <a href="{{ route('home-page') }}#publishing-start-form" class="link-underline">Publish now <i class="icon-arrow-right-3"></i></a>
+                                </div>
                             </div>
-                            <div class="link-container">
-                                <a href="" class="link-underline">Publish now <i class="icon-arrow-right-3"></i></a>
+                            <div class="box-cont box-cont-2 box-show-less-than-time" style="display: none;">
+                                <div class="cont">
+                                    <h2 class="main-title-2">
+                                        <strong>You are at day <span class="how-match-days-count"></span>!</strong>
+                                    </h2>
+                                    <p>In order to complete the Publishing Compliance in a timely manner, it is strongly advised that you initiate the process now!</p>
+                                </div>
+                                <a href="{{ route('home-page') }}#publishing-start-form" class="link-underline">Publish Now! <i class="icon-arrow-right-3"></i></a>
+                            </div>
+                            <div class="box-cont box-cont-3">
+                                <form action="" class="popup-form twentin-calculator">
+                                    <div class="form-group">
+                                        <label>Entity name</label>
+                                        <input type="text" name="entity-name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Date of filing</label>
+                                        <input type="text" class="datepicker-input" name="date-calculator" required>
+                                        <div class="datepicker-box"></div>
+                                    </div>
+                                    <div class="btn-holder">
+                                        <button type="submit" class="btn btn-2">Calculate</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                         <a href="#" class="close"></a>
@@ -320,7 +341,7 @@
         <div class="container">
             <i class="icon-papper publish-icon"></i>
             <h2 class="line-decor">
-                <a href="#">
+                <a href="#publishing-start-form">
                     <span>Publish Now </span>
                     <i class="icon-arrow-right-bold"></i>
                 </a>

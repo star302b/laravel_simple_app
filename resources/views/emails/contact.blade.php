@@ -1,9 +1,9 @@
 <div>
-    <strong>Name: </strong><span>{{$form_data['name']}}</span>
+    <strong>Name: </strong><span>{{$form_data['username']}}</span>
 </div>
-@if(isset($form_data['business_name']) && !empty($form_data['business_name']))
+@if(isset($form_data['company_name']) && !empty($form_data['company_name']))
     <div>
-        <strong>Business name: </strong><span>{{$form_data['business_name']}}</span>
+        <strong>Company name: </strong><span>{{$form_data['company_name']}}</span>
     </div>
 @endif
 @if(isset($form_data['email']) && !empty($form_data['email']))
@@ -16,9 +16,9 @@
         <strong>Phone Number: </strong><span>{{$form_data['phone']}}</span>
     </div>
 @endif
-@if(isset($form_data['message']) && !empty($form_data['message']))
+@if(isset($form_data['comment']) && !empty($form_data['comment']))
     <div>
-        <strong>Message / Request: </strong><p>@php echo html_entity_decode(htmlentities(preg_replace("/\r\n|\r|\n/",'<br/>',$form_data['message']))) @endphp</p>
+        <strong>Message / Request: </strong><p>@php echo html_entity_decode(htmlentities(preg_replace("/\r\n|\r|\n/",'<br/>',$form_data['comment']))) @endphp</p>
     </div>
 @endif
 @if(isset($ip_address) && !empty($ip_address))

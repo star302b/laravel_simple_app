@@ -7,11 +7,36 @@ use phpDocumentor\Reflection\Types\Self_;
 
 class CountyList extends Model
 {
+
+    public static function getCounty($county_id){
+        return self::getCountyListWithoutPreffix()[$county_id];
+    }
+    public static function getCurrentPrice($name,$type){
+        if($county_price = CountyPrice::where('county_name',$name)->where('county_type',$type)->first())
+            return $county_price->price;
+        return 0;
+    }
+    public static function getPrice($name,$type){
+        if($county_price = CountyPrice::where('county_name',$name)->where('county_type',$type)->first())
+            return $county_price->price;
+        return 0;
+    }
+    public static function getCountyListWithoutPreffixForService($type = 0){
+        $all_countys = self::getCountyList();
+        $new_countis = array();
+        foreach ($all_countys as $key => $all_county){
+            if($key != 0 && $all_county != 'New York County'){
+                $new_countis[$key]['name'] = str_replace(' County','',$all_county);
+                $new_countis[$key]['price'] = self::getPrice($new_countis[$key]['name'],$type);
+            }
+        }
+        return $new_countis;
+    }
     public static function getCountyListWithoutPreffix(){
         $all_countys = self::getCountyList();
         $new_countis = array();
         foreach ($all_countys as $key => $all_county){
-            if($key != 0 ){
+            if($key != 0){
                 $new_countis[] = str_replace(' County','',$all_county);
             }
         }

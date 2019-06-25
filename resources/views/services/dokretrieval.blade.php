@@ -45,7 +45,7 @@
                             </div>
                             <div class="form-group">
                                 <label>County of formation <small>(optional)</small></label>
-                                <input type="text" name="county_of_formation">
+                                <input type="text" name="selected_county">
                             </div>
                             <div class="form-group">
                                 <label>Your Name</label>
@@ -53,7 +53,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Email address</label>
-                                <input type="email" name="yout_email">
+                                <input type="email" name="your_email">
                             </div>
                             <div class="form-group">
                                 <label>Phone number</label>
@@ -79,13 +79,13 @@
                                 </div>
                                 <div class="facilitating-no" style="display: none;">
                                     <div class="form-group">
-                                        <span class="additional-info" ><b>You are ordering your</b><br><b>Certificate of Publication: $45</b></span>
+                                        <span class="additional-info" ><b>You are ordering your</b><br><b style="color: #15605d;">Certificate of Publication:</b> <b>$45</b></span>
                                     </div>
                                     <div class="form-group">
                                         <ul class="radio-list">
                                             <li>
                                                 <input type="checkbox" id="certified" value="certified" name="documents[]" data-price="10" data-price_label="Certificate Certified">
-                                                <label for="certified" class="light">I need my certificate certified</label>
+                                                <label for="certified" class="light" style="font-weight: 400;font-size: 17px;color: #000;">I need my certificate certified<br><span style="color: #15605d;">Additional $10</span></label>
                                             </li>
                                         </ul>
                                     </div>
@@ -112,13 +112,13 @@
                                         {{-- TODO if less 90 day--}}
                                         <span class="additional-info less-thithy-month" style="display: none">Since this order was placed less than 3 months ago, there will be no charge for the retrieval of your documents. </span>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group show-when-date-done">
                                         <label>Please select the documents you need today:</label>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group show-when-date-done">
                                         <ul class="radio-list">
                                             <li>
-                                                <input type="checkbox" id="affidavits" value="affidavits" name="documents[]" data-price="45" data-price_label="Affidavits of Publication">
+                                                <input type="checkbox" id="affidavits" value="affidavits" name="documents[]" data-price="0" data-price_label="Affidavits of Publication">
                                                 <label for="affidavits" class="light">Affidavits of Publication</label>
                                             </li>
                                             <li>
@@ -135,6 +135,8 @@
                                 <span class="total">Total $<span class="total-box-price">0</span></span>
                             </div>
                         </div>
+
+                        <input type="hidden" name="base_main_price" value="{{ $price }}">
                         <div class="total-box">
                             <p>Total: $<span class="total-box-price">0</span></p>
                             <button type="submit" class="btn">Continue</button>

@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\CountyImport;
+use App\CountyPromoCode;
+use App\Observers\CountyImportObserver;
+use App\Observers\CountyPromoCodeObserver;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +28,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Schema::defaultStringLength(191);
+
+        CountyPromoCode::observe(CountyPromoCodeObserver::class);
+        CountyImport::observe(CountyImportObserver::class);
+
     }
 }

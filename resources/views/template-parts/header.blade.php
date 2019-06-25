@@ -11,6 +11,12 @@
     <script src='https://www.google.com/recaptcha/api.js'></script>
 
     <!-- endbuild -->
+    <style>
+        .foreign-show,
+        .show-when-date-done{
+            display: none;
+        }
+    </style>
 </head>
 <body>
 @php
@@ -37,7 +43,7 @@ if($routeName == 'price-match.index'){
             @endphp
             <ul class="header-menu">
                 <li class="{{$active_class['publish-now']}}">
-                    <a href="#">
+                    <a href="{{ route('home-page') }}#publishing-start-form">
                         <div class="img-box">
                             <i class="icon-note"></i>
                         </div>
@@ -69,7 +75,7 @@ if($routeName == 'price-match.index'){
                     </a>
                 </li>
                 <li class="{{$active_class['120-days-calculator']}}">
-                    <a href="#">
+                    <a href="{{ route('home-page') }}?open_calculator#popap-main-clculator">
                         <div class="img-box">
                             <i class="icon-calculate-2"></i>
                         </div>
