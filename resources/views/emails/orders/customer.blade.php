@@ -71,6 +71,3 @@
     </tr>
     </tbody>
 </table>
-@php
-die();
-@endphp
