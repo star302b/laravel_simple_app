@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Extensions\Tools\CountyDownloadLink;
 use App\CountyImport;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -28,6 +29,10 @@ class CountyImportController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('file', __('File'));
+
+        $grid->tools(function ($tools) {
+            $tools->append(new CountyDownloadLink());
+        });
 
         return $grid;
     }
