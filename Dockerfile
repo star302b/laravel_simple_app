@@ -48,5 +48,5 @@ RUN chmod -R 777 /var/www
 # USER www
 
 # Expose port 9000 and start php-fpm server
-EXPOSE 9000 8088
+EXPOSE 9000 80
 CMD ["php-fpm"]

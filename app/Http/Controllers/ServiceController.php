@@ -90,7 +90,7 @@ class ServiceController extends Controller
         $order->data = json_encode($product_data);
         $order->save();
 
-        if($product_data['total_price'] && 0) {
+        if($product_data['total_price'] ) {
             $tran = new umTransaction();
 
 
@@ -227,7 +227,7 @@ class ServiceController extends Controller
         $order->data = json_encode($product_data);
         $order->save();
 
-        if($product_data['total_price']) {
+        if($product_data['total_price'] && 0) {
             $tran = new umTransaction();
 
 
