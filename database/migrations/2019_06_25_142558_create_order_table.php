@@ -20,7 +20,7 @@ class CreateOrderTable extends Migration
             $table->string('entity_ending')->nullable();
             $table->string('county')->nullable();
             $table->string('promo')->nullable();
-            $table->json('data')->nullable();
+            $table->text('data')->nullable();
 
             $table->timestamps();
         });
